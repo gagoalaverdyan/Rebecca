@@ -5,11 +5,11 @@ from .rebecca.mainfunctions import *
 
 
 def main():
-    print("Welcome to Rebecca")  # Add short intro afetr and add colors
-    choice = input("Enter 'e' to encrypt or 'd' to decrypt:\n")  # need to add checks
-    message = input("Enter the message:\n")  # need to add checks
-    shift = input("Enter the shift value (1-366):\n")  # need to add checks
-    crypt_file = input("Enter the filename with extension (e.g. crypto.txt):\n")
+    welcome_message()
+    choice = make_choice()  # Add colors, q to exit
+    message = enter_message()  # Add colors, q to exit
+    shift = enter_shift()  # Add colors, q to exit
+    crypt_file = get_cipher_file()  # Add colors, q to exit
 
     text = load_file(crypt_file)
     char_dict = make_dict(text, shift)
