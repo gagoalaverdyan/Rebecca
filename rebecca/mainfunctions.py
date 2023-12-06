@@ -31,9 +31,16 @@ def enter_message():
 def enter_shift():
     """Receive a number in the range 1-365 to simulate the daily shift and encrypt or decrypt characters."""
     shift = input("Enter the shift value (1-365):\n")
-    while not shift or type(shift) != int or not 1 <= shift <= 365:
-        shift = input("The shift value must be an integer in the range 1-365:\n")
-    return shift
+    try:
+        shift = int(shift)
+        if 1 <= shift <= 365:
+            return shift
+        else:
+            print("The shift value must be in the range 1-365.")
+            enter_shift()
+    except ValueError:
+        print("Please enter a valid integer in the range 1-365.")
+        enter_shift()
 
 
 def get_cipher_file():
@@ -42,7 +49,9 @@ def get_cipher_file():
         input("Enter the cipher filename with extension (e.g. crypto.txt):\n")
     )
     while not filename or filename[-4:] != ".txt" or not os.path.exists(filename):
-        filename = input("Enter a valid .txt file name:\n")
+        filename = input(
+            "File entered is not a .txt or does not exist.\nEnter a valid .txt file name:\n"
+        )
     return filename
 
 
@@ -59,3 +68,12 @@ def make_dict(text, shift):
     for index, char in enumerate(text):
         char_dict[char].append(index + shift)
     return char_dict
+
+
+def failure_check(cipher):
+    """Return a boolean value of cipher text containing duplicate keys."""
+    check = [k for k, v in Counter(cipher).items() if v > 1]
+    if len(check) > 0:
+        return True
+    else:
+        return False

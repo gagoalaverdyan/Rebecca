@@ -1,7 +1,7 @@
-import random
 import sys
 
-from .rebecca.mainfunctions import *
+from rebecca.cipher import *
+from rebecca.mainfunctions import *
 
 
 def main():
@@ -16,7 +16,7 @@ def main():
 
     if choice == "encrypt":
         cipher_text = encrypt(message, char_dict)
-        if check_fails(cipher_text):
+        if failure_check(cipher_text):
             print("\nUnique keys finding error :(")
             print("\nTry changing the provided crypt file.")
             sys.exit()  # Make a function
@@ -25,12 +25,11 @@ def main():
         for key in sorted(char_dict.keys()):
             print(
                 "{: >10}{: >10}{: >10}".format(
-                    repr(key()[1:-1]),
+                    repr(key)[1:-1],
                     str(ord(key)),
                     len(char_dict[key]),
                 )
             )
-
         print(f"\nNumber of distinct characters: {len(char_dict)}")
         print(f"Total number of characters: {len(text)}\n")
         print(f"Encrypted ciphertext = \n{cipher_text}\n")
@@ -41,3 +40,7 @@ def main():
     elif choice == "decrypt":
         plaintext = decrypt(message, text, shift)
         print(f"\nDecrypted plaintext = {plaintext}")
+
+
+if __name__ == "__main__":
+    main()
