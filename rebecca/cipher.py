@@ -30,11 +30,9 @@ def decrypt(message, text, shift):
 
 def print_encryption_message(cipher_text, text, shift):
     print(colored("\nEncrypted message:", "yellow"))
-    if len(cipher_text) > 10:
-        for i in range(0, len(cipher_text), 10):
-            print(
-                " ".join(str(element).ljust(8) for element in cipher_text[i : i + 10])
-            )
+    if len(cipher_text) > 8:
+        for i in range(0, len(cipher_text), 8):
+            print(" ".join(str(element).ljust(8) for element in cipher_text[i : i + 8]))
     print(colored("Decrypted message:", "red"))
     for i in cipher_text:
         print(text[i - shift], end="", flush=True)
