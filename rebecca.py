@@ -17,11 +17,16 @@ def main():
     if choice == "encrypt":
         cipher_text = encrypt(message, char_dict)
         failure_check(cipher_text)
-        print_encrypted_message(char_dict, shift, cipher_text, text)
-
+        print_encryption_message(cipher_text, text, shift)
     elif choice == "decrypt":
         plaintext = decrypt(message, text, shift)
-        print(f"\nDecrypted plaintext = {plaintext}")
+        print_decryption_message(plaintext)
+
+    final_choice = print_final_message()
+    if final_choice in ("y", "Y"):
+        print_one_time_pad(char_dict, text)
+    else:
+        sys.exit()
 
 
 if __name__ == "__main__":

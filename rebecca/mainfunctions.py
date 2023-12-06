@@ -35,9 +35,9 @@ def welcome_message():
 
 def make_choice():
     """Receive user's intention to encrypt or decrypt the message and return it."""
-    print(colored("\n1. Enter 'e' to encrypt a message", "yellow"))
-    print(colored("2. Enter 'd' to decrypt a message", "yellow"))
-    print(colored("3. Enter 'q' to to quit the program", "yellow"))
+    print(colored("\n  1. Enter 'e' to encrypt a message", "yellow"))
+    print(colored("  2. Enter 'd' to decrypt a message", "yellow"))
+    print(colored("  3. Enter 'q' to to quit the program", "yellow"))
 
     while True:
         choice = input()
@@ -54,32 +54,13 @@ def make_choice():
 def enter_message():
     """Receive user's message to encrypt or decrypt and return it."""
     while True:
-        message = str(input(colored("Enter the message or 'q' to quit:\n", "green")))
+        message = str(input(colored("\nEnter the message or 'q' to quit:\n", "green")))
         if not message:
             print(colored("No input received.", "red"))
         if message in ("q", "Q"):
             sys.exit()
         else:
             return message
-
-
-def enter_shift():
-    """Receive a number in the range 1-365 to simulate the daily shift and encrypt or decrypt characters."""
-    while True:
-        shift = input(
-            colored("Enter the shift value (1-365) or 'q' to quit:\n", "green")
-        )
-        try:
-            if shift in ("q", "Q"):
-                sys.exit()
-            else:
-                shift = int(shift)
-                if 1 <= shift <= 365:
-                    return shift
-                else:
-                    print(colored("The shift value must be in the range 1-365.", "red"))
-        except ValueError:
-            print(colored("Please enter a valid integer in the range 1-365.", "red"))
 
 
 def get_cipher_file():
@@ -99,6 +80,25 @@ def get_cipher_file():
             sys.exit()
         else:
             return filename
+
+
+def enter_shift():
+    """Receive a number in the range 1-365 to simulate the daily shift and encrypt or decrypt characters."""
+    while True:
+        shift = input(
+            colored("Enter the shift value (1-365) or 'q' to quit:\n", "green")
+        )
+        try:
+            if shift in ("q", "Q"):
+                sys.exit()
+            else:
+                shift = int(shift)
+                if 1 <= shift <= 365:
+                    return shift
+                else:
+                    print(colored("The shift value must be in the range 1-365.", "red"))
+        except ValueError:
+            print(colored("Please enter a valid integer in the range 1-365.", "red"))
 
 
 def load_file(filename):
@@ -123,6 +123,13 @@ def failure_check(cipher):
         print(colored("\nUnique keys finding error :(", "red"))
         print(colored("Try changing the provided crypt file.", "red"))
         sys.exit()
+
+
+def print_final_message():
+    print(colored("\nShow the one-time pad generated based on the cipher?", "green"))
+    print(colored("Enter 'y' for Yes or 'n' for No", "green"))
+    final_choice = input()
+    return final_choice
 
 
 if __name__ == "__main__":

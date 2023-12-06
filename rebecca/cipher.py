@@ -13,13 +13,41 @@ def encrypt(message, char_dict):
         elif char_len == 1:
             index = char_dict[char][0]
         else:
-            print("\nCharacter {char} is not in dictionary.")
+            print(colored("\nCharacter {char} is not in dictionary.", "red"))
             continue
         encrypted.append(index)
     return encrypted
 
 
-def print_encrypted_message(char_dict, shift, cipher_text, text):
+def decrypt(message, text, shift):
+    """Decrypt the encrypted message and return it as plain text."""
+    plain_text = str()
+    indexes = [i for i in message.split()]
+    for i in indexes:
+        plain_text += text[int(i) - shift]
+    return plain_text
+
+
+def print_encryption_message(cipher_text, text, shift):
+    print(colored("\nEncrypted message:", "yellow"))
+    if len(cipher_text) > 10:
+        for i in range(0, len(cipher_text), 10):
+            print(
+                " ".join(str(element).ljust(8) for element in cipher_text[i : i + 10])
+            )
+    print(colored("Decrypted message:", "red"))
+    for i in cipher_text:
+        print(text[i - shift], end="", flush=True)
+    print()
+
+
+def print_decryption_message(plaintext):
+    print(colored("\nDecrypted message:", "red"))
+    print(plaintext)
+
+
+def print_one_time_pad(char_dict, text):
+    print()
     print("{: >10}{: >10}{: >10}".format("Character", "Unicode", "Count"))
     for key in sorted(char_dict.keys()):
         print(
@@ -29,23 +57,8 @@ def print_encrypted_message(char_dict, shift, cipher_text, text):
                 len(char_dict[key]),
             )
         )
-    print(f"\nNumber of distinct characters: {len(char_dict)}")
-    print(f"Total number of characters: {len(text)}\n")
-    print(f"Encrypted ciphertext = \n{cipher_text}\n")
-    print(f"Decrypted plaintext = ")
-    for i in cipher_text:
-        print(text[i - shift], end="", flush=True)
-
-
-def decrypt(message, text, shift):
-    """Decrypt the encrypted message and return it as plain text."""
-    plain_text = str()
-    indexes = [
-        i.replace(",", "").replace("[", "").replace("]", "") for i in message.split()
-    ]  # Just a precaution that the user might copy the encrypted message from the output including the brackets and commas
-    for i in indexes:
-        plain_text += text[int(i) - shift]
-    return plain_text
+    print(colored("\nNumber of distinct characters:", "yellow"), len(char_dict))
+    print(colored("Total number of characters:", "yellow"), (len(text)))
 
 
 if __name__ == "__main__":
