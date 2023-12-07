@@ -54,11 +54,9 @@ def make_choice():
 def enter_message():
     """Receive user's message to encrypt or decrypt and return it."""
     while True:
-        message = str(input(colored("\nEnter the message or 'q' to quit:\n", "green")))
+        message = str(input(colored("\nEnter the message:\n", "green")))
         if not message:
             print(colored("No input received.", "red"))
-        if message in ("q", "Q"):
-            sys.exit()
         else:
             return message
 
@@ -69,15 +67,13 @@ def get_cipher_file():
         filename = str(
             input(
                 colored(
-                    "Enter the cipher filename with extension (e.g. crypto.txt) or 'q' to quit:\n",
+                    "Enter the cipher filename with extension (e.g. crypto.txt):\n",
                     "green",
                 )
             )
         )
         if not filename or filename[-4:] != ".txt" or not os.path.exists(filename):
             print(colored("File entered is not a .txt or does not exist.", "red"))
-        elif filename in ("q", "Q"):
-            sys.exit()
         else:
             return filename
 
@@ -85,18 +81,13 @@ def get_cipher_file():
 def enter_shift():
     """Receive a number in the range 1-365 to simulate the daily shift and encrypt or decrypt characters."""
     while True:
-        shift = input(
-            colored("Enter the shift value (1-365) or 'q' to quit:\n", "green")
-        )
+        shift = input(colored("Enter the shift value (1-365):\n", "green"))
         try:
-            if shift in ("q", "Q"):
-                sys.exit()
+            shift = int(shift)
+            if 1 <= shift <= 365:
+                return shift
             else:
-                shift = int(shift)
-                if 1 <= shift <= 365:
-                    return shift
-                else:
-                    print(colored("The shift value must be in the range 1-365.", "red"))
+                print(colored("The shift value must be in the range 1-365.", "red"))
         except ValueError:
             print(colored("Please enter a valid integer in the range 1-365.", "red"))
 
