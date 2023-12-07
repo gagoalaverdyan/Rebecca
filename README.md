@@ -18,7 +18,9 @@ pip install termcolor
 
 ## Usage
 
-Make sure a .txt book is in the program's root directory to be used as the cipher.
+The program comes with a .txt book files for testing:
+frankenstein.txt - Frankenstein by Mary Shelley
+
 ```python
 python ./rebecca.py
 ```
