@@ -5,7 +5,7 @@ users can input a shift parameter, to simulate the current-day technique used in
 
 The program uses [termcolor](https://pypi.org/project/termcolor/) package from pip for colorful output.
 
-![image](https://i.imgur.com/oMaW2UD.png)
+![image](https://i.imgur.com/Ir2ym05.png)
 
 ## Installation
 
