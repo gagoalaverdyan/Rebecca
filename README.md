@@ -18,7 +18,7 @@ pip install termcolor
 
 ## Usage
 
-Make sure a .txt book is in the program's root directory to be used a sthe cifer.
+Make sure a .txt book is in the program's root directory to be used as the cipher.
 ```python
 python ./rebecca.py
 ```
